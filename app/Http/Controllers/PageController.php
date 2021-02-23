@@ -15,4 +15,9 @@ class PageController extends Controller
     {
         return view('pages.home');
     }
+
+    public function post_list()
+    {
+        return view('pages.blog.blog');
+    }
 }
