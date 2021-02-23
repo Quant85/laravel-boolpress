@@ -14,7 +14,7 @@ class PostsSeeder extends Seeder
     public function run(Faker $faker)
     {
         //
-        for ($i=0; $i < 20; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
             $newPost = new Post();
             $newPost->title = $faker->sentence(rand(1,5));
             $newPost->subtitle = $faker->sentence(rand(2,4));

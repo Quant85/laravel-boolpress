@@ -26,3 +26,17 @@ Route::get('posts', function (){
         'resources' => App\Post::all()
     ], 200);
 });
+
+Route::get('categories', function (){
+    return response()->json([
+        'success' => true,
+        'resources' => App\Category::all()
+    ], 200);
+});
+
+Route::get('tags', function (){
+    return response()->json([
+        'success' => true,
+        'resources' => App\Tags::all()
+    ], 200);
+});
