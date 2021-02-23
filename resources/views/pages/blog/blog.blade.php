@@ -30,11 +30,6 @@
 
 @section('main')
     @include('pages.blog.main')
-    <div id="app">
-
-        <post-component></post-component>
-
-    </div>
 @endsection
 
 @section('footer')

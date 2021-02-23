@@ -6407,7 +6407,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-98af649c] {\n  display: flex;\n  flex-flow: column wrap;\n  align-items: center;\n}", ""]);
+exports.push([module.i, ".card[data-v-98af649c] {\n  display: flex;\n  flex-flow: column wrap;\n  align-items: center;\n  margin: 4rem 4rem;\n  border-radius: 2rem;\n}\n.card .card-header[data-v-98af649c] {\n  width: 90%;\n}\n.card .card-body[data-v-98af649c] {\n  width: 80%;\n  display: flex;\n  flex-flow: column wrap;\n  justify-content: center;\n  text-transform: capitalize;\n}\n.card .card-body img[data-v-98af649c] {\n  margin: 20px 0;\n}", ""]);
 
 // exports
 
@@ -38256,7 +38256,7 @@ var render = function() {
         "div",
         { staticClass: "col-md-8" },
         _vm._l(_vm.posts, function(post) {
-          return _c("div", { key: post, staticClass: "card" }, [
+          return _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _c("h2", [_vm._v("Post id: " + _vm._s(post.id))]),
               _vm._v(" "),

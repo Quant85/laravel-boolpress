@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card" v-for=" post in posts" v-bind:key="post">
+                <div class="card" v-for="post in posts">
                     <div class="card-header">
                         <h2>Post id: {{post.id}}</h2>
                         <h2>Title: {{post.title}}</h2>
@@ -46,5 +46,20 @@
         display: flex;
         flex-flow: column wrap;
         align-items: center;
+        margin: 4rem 4rem;
+        border-radius: 2rem;
+        .card-header{
+            width: 90%;
+        }
+        .card-body{
+            width: 80%;
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            text-transform: capitalize;
+            img{
+                margin: 20px 0;
+            }
+        }
     }
 </style>
