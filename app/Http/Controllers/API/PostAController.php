@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Post;
-use App\Category;
-
 
 class PostController extends Controller
 {
@@ -15,9 +14,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        $posts = Post::all();
-        return view('pages.panel_control.index', compact('posts'));
+    //dammi un file json
+    //restituiscimi una risposta in formato json
+        return response()->json([
+            //che cosa voglio mostrare
+            'success' => true,
+            'resources' => Post::all()
+        ], 200);
     }
 
     /**
@@ -28,8 +31,7 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('pages.panel_control.create');
-
+        return view('posts.create');
     }
 
     /**
@@ -51,13 +53,14 @@ class PostController extends Controller
         $post = new Post([
             'title' => $request->get('title'),
             //equivalente di 'title' => request('title')
+
             'subtitle' => $request->get('subtitle'),
             'img' => $request->get('img'),
-            'body' => $request->get('body'),
-            ]);
+            'body' => $request->get('body')
+        ]);
         //andiamo a salvare la risorsa appena creata
         $post->save();
-        return redirect('/panel')->with('success', 'Post saved!');
+        return redirect('/posts')->with('success', 'Post saved!');
     }
 
     /**
@@ -71,7 +74,7 @@ class PostController extends Controller
         //
         $post = Post::find($id);
 
-        return view('pages.panel_control.show', compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -84,7 +87,7 @@ class PostController extends Controller
     {
         //
         $post = Post::find($id);
-        return view('pages.panel_control.edit', compact('post'));
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -108,9 +111,8 @@ class PostController extends Controller
         $post->subtitle = $request->get('subtitle');
         $post->img = $request->get('img');
         $post->body = $request->get('body');
-        $post->category()->name =  $request->get('category_name');
         $post->save();
-        return redirect('/panel')->with('success', 'Post saved!');
+        return redirect('/posts')->with('success', 'Post saved!');
     }
 
     /**
@@ -124,6 +126,6 @@ class PostController extends Controller
         //
         $post = Post::find($id);
             $post->delete();
-            return redirect('/panel')->with('success', 'Post deleted!');
+            return redirect('/posts')->with('success', 'Post deleted!');
     }
 }

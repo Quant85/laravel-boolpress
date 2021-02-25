@@ -1,0 +1,18 @@
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  margin: 0rem 0 4rem 0;
+  background-color: aliceblue;
+  ul{
+    list-style: none;
+    li{
+      line-height: 2rem;
+      a{
+        font-size: 1.8rem;
+        color: rgb(209, 209, 209);
+        text-shadow: 1px 1px 2px black;
+      }
+    }
+  }
+}

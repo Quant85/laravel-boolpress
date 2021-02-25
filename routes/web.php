@@ -18,4 +18,7 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+
 Route::get('blog','PageController@post_list');
+
+Route::resource('panel', 'PostController');

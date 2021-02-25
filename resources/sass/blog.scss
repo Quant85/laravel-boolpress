@@ -1,0 +1,15 @@
+#blog-main{
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  .component{
+    width: 100%;
+    display: flex;
+    justify-items: center;
+  }
+  .categories, .posts {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+}

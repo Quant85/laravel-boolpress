@@ -13,4 +13,12 @@ class Post extends Model
     'img',
     'body'     
     ] ;
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category')->withDefault([
+            'name' => 'N/a'
+        ]);
+    }
 }
+

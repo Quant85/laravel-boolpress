@@ -1,0 +1,19 @@
+.main-article-card {
+  display: flex;
+  justify-content: center;
+  .article-card{
+    padding:  4rem;
+    border: 1px solid grey;
+    border-radius: 1rem;
+    box-shadow: -2px 1px 10px #686262;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    margin: 2rem;
+    .btn{
+      padding: 1rem;
+      background-color: #b4dcff;
+      border-radius: 1rem;
+    }
+  }
+}

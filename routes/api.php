@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('posts', function (){
+/* Route::get('posts', function (){
     //dammi un file json
     //restituiscimi una risposta in formato json
     return response()->json([
@@ -25,14 +25,18 @@ Route::get('posts', function (){
         'success' => true,
         'resources' => App\Post::all()
     ], 200);
-});
+}); */
 
-Route::get('categories', function (){
+Route::get('posts', 'API\PostController@index');
+
+Route::get('categories', 'API\CategoryController@index');
+
+/* Route::get('categories', function (){
     return response()->json([
         'success' => true,
         'resources' => App\Category::all()
     ], 200);
-});
+}); */
 
 Route::get('tags', function (){
     return response()->json([
