@@ -81,14 +81,45 @@
                   <td>
                     <a href="{{ route('panel.show',$post->id)}}" class="btn btn-primary">Show</a>
                   </td>
-                  <td>
+                 {{--  <td>
                       <form action="{{ route('panel.destroy', $post->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Delete</button>
                       </form>
+                  </td> --}}
+
+                  {{-- Botton trigger Modal --}}
+                  <td>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#destroy-{{$post->id}}">Delete</button>
                   </td>
-              </tr>
+                  {{-- Start Add Modal -  --}}
+                  <div class="modal fade" id="destroy-{{$post->id}}" tabindex="-1" role="dialog" aria-labelledby="post-destroy-{{$post->id}}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="#destroy-{{$post->id}} title">Delete Post</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          🚨 Sei sicuro di volerlo cancellare? 🚨 <br> 🚨 E se poi te ne penti?! 🚨
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <form action="{{ route('panel.destroy', $post->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {{-- End Add Model --}}
+                </tr>
             </tbody>
           </table>
           @endforeach
@@ -102,6 +133,11 @@
         </div>
       @endif
     </div>
-
   </main>
+@endsection
+
+@section('footer')
+<footer>
+  <script src="{{asset('js/app.js')}}"></script>
+</footer>
 @endsection

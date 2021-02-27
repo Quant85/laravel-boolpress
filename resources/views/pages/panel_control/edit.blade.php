@@ -61,6 +61,42 @@
                 <label for="body">Body Post:</label>
                 <textarea id="validationTextarea" class="form-control " name="body" cols="50" rows="10">{{$post->body}}</textarea>
             </div>
+            @error('body')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <div class="form-group">
+                <label for="categories">Categories</label>
+                <select class="form-control" name="category_id" id="categories">
+                    @foreach ($categories as $category)
+                    <h1>{{$category}}</h1>
+                    <option value="{{$category->id}}"
+                        {{ ($post->category_id == $category->id ? 'selected' : ' ') }}>
+                        {{$category->name}}
+                    </option>
+                @endforeach
+                </select>
+            </div>
+            @error('categories')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <select class="form-control" name="tags[]" id="tags" multiple>
+                    @if(count($tags) > 0)
+                        @foreach ($tags as $tag)
+                            <option value="{{$tag->id}}"
+                                {{ ($post->tags->contains($tag) ? 'selected' : ' ') }}>
+                                {{$tag->name}}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+                </div>
+            @error('tags')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>

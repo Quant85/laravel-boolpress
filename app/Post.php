@@ -12,7 +12,6 @@ class Post extends Model
     'subtitle',
     'img',
     'body',
-    'tags',
     'category_id'
     ] ;
 

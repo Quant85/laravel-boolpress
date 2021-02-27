@@ -45,21 +45,33 @@
               <label for="title">Title:</label>
               <input type="text" class="form-control" name="title"/>
           </div>
+          @error('title')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
 
           <div class="form-group">
               <label for="subtitle">Subtitle:</label>
               <input type="text" class="form-control" name="subtitle"/>
           </div>
+          @error('subtitle')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
 
           <div class="form-group">
               <label for="img">URL Img:</label>
               <input type="text" class="form-control" name="img"/>
           </div>
+          @error('img')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
           
           <div class="form-group">
               <label for="body">Body Post:</label>
               <textarea id="validationTextarea" class="form-control " name="body" cols="50" rows="10"></textarea>
           </div>
+          @error('body')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
 
           <div class="form-group">
               <label for="categories">Categories</label>
@@ -69,15 +81,23 @@
               @endforeach
             </select>
           </div>
-
-          <div class="form-group">
-            <label for="tags">Tags</label>
-            <select class="form-control" name="tags[]" id="tags" multiple>
-              @foreach ($tags as $tag)
-                  <option value="{{$tag->id}}">{{$tag->name}}</option>
-              @endforeach
-            </select>
-          </div>
+          @error('categories')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        
+          @if(count($tags) > 0)
+            <div class="form-group">
+              <label for="tags">Tags</label>
+              <select class="form-control" name="tags[]" id="tags" multiple>
+                @foreach ($tags as $tag)
+                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+              </select>
+            </div>
+          @endif
+        @error('tags')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
           <button type="submit" class="btn btn-outline-primary btn-block">Add Post</button>
       </form>

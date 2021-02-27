@@ -16,7 +16,7 @@ class AddForeignIdToPostsTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             //
             $table->unsignedBigInteger('category_id')->after('id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');//quando cancello una categoria, tutti i post in quella categoria vengono cancellati a cascata - nel caso non si vogliano perdere prima migrare/modificare la categoria del post e poi eliminare la categoria
         });
     }
 

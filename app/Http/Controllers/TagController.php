@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Tag;
+use App\Post;
 
 class TagController extends Controller
 {
@@ -15,7 +16,7 @@ class TagController extends Controller
     public function index()
     {
         //
-        $tags = Tag::all();
+        $tags = Tag::latest()->get();;
         return view('pages.panel_control.tag_control.index', compact('tags'));
     }
 
@@ -83,10 +84,12 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd($request->all());
         $request->validate([
             'name'=>'required',
             'slug'=>'required',
-            'description'=>'required'
+            'description'=>'required',
+            'post'
             ]);
 
         $tag = Tag::find($id);
@@ -105,9 +108,11 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
         //
+        $tag = Tag::find($id);
+        $tag->posts()->detach();
         $tag->delete();
         return redirect('/tag')->with('succes', 'Tag delete');
     }

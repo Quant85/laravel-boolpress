@@ -46,8 +46,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        //$prova = json_encode($request->tags);
 
         //dd($request->all());
+        //dd($prova);
         //elementi di validazione necessari
         $validate_date = $request->validate([
             'title'=>'required',
@@ -55,7 +57,7 @@ class PostController extends Controller
             'body'=>'required',
             'img'=>'required',
             'category_id' => 'required',
-            'tags[]'=>'exists:tags, id'
+            'tags' => 'exists:tags,id'
             ]);
 
         //dd($validate_date);
@@ -70,11 +72,12 @@ class PostController extends Controller
             ]); */
 
         Post::create($validate_date);
-
+        
         $post = Post::orderBy('id','desc')->first();
         $post->tags()->attach($request->tags);
         //andiamo a salvare la risorsa appena creata
         //$post->save();
+        /* $post->tags()->sync((array)$request->input('tags')); */
         return redirect('/panel')->with('success', 'Post saved!');
     }
 
@@ -102,7 +105,9 @@ class PostController extends Controller
     {
         //
         $post = Post::find($id);
-        return view('pages.panel_control.edit', compact('post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('pages.panel_control.edit', compact('post','categories','tags'));
     }
 
     /**
@@ -112,13 +117,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Post $post, $id)
     {
         //
-        $request->validate([
+        //dd($request->tags);
+        $validate_date = $request->validate([
             'title'=>'required',
             'subtitle'=>'required',
-            'body'=>'required'
+            'body'=>'required',
+            'img'=>'required',
+            'category_id' => 'required',
+            'tags' => 'exists:tags,id'
         ]);
 
         $post = Post::find($id);
@@ -127,7 +136,9 @@ class PostController extends Controller
         $post->img = $request->get('img');
         $post->body = $request->get('body');
         $post->category()->name =  $request->get('category_name');
-        $post->update();
+        $post->update($validate_date);
+        $post->tags()->sync($request->tags);
+
         return redirect('/panel')->with('success', 'Post saved!');
     }
 
@@ -142,7 +153,7 @@ class PostController extends Controller
         //
         $post = Post::find($id);
         $post->tags()->detach();
-            $post->delete();
-            return redirect('/panel')->with('success', 'Post deleted!');
+        $post->delete();
+        return redirect('/panel')->with('success', 'Post deleted!');
     }
 }
