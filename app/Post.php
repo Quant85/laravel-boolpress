@@ -11,7 +11,9 @@ class Post extends Model
     'title',
     'subtitle',
     'img',
-    'body'     
+    'body',
+    'tags',
+    'category_id'
     ] ;
 
     public function category()
@@ -19,6 +21,12 @@ class Post extends Model
         return $this->belongsTo('App\Category')->withDefault([
             'name' => 'N/a'
         ]);
+    }
+
+    public function tags()
+    {
+        # code...
+        return $this->belongsToMany(Tag::class);
     }
 }
 

@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <h2>category id: {{category.id}}</h2>
                     <h2>Name Category: {{category.name}}</h2>
-                    <h3>Se: {{category.adult}}</h3>
+                    <h3>Adult: {{category.adult ? 'Yes' : 'No'}}</h3>
                 </div>
 
                 <div class="card-body">
@@ -30,7 +30,9 @@
         mounted() {
             console.log('Component mounted.')
             axios.get('api/categories').then(response => {
+                console.log(response.data.resources);
                 this.categories = response.data.resources;
+                this.$set(this.posts,"category_name","")
             }).catch (error => {
                 console.log(error);
             });

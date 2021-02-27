@@ -28,7 +28,6 @@
 @endsection
 @section('main')
   <main id="panel-main">
-    
     <aside class="btn-controller">
         <a class="dropdown-item {{Route::currentRouteName() ==='panel.index' ? 'active' :''}}" href="{{ route('panel.index')}}" class="btn btn-primary">Panel Control </a>
         <a class="dropdown-item {{Route::currentRouteName() ==='category.index' ? 'active' :''}}" href="{{ route('category.index')}}" class="btn btn-primary">Category</a>
@@ -36,53 +35,39 @@
     </aside>
     <div class="row container">
       <div class="col-sm-12">
-        <h1 class="display-3">Admin Panel Posts</h1>   
+        <h1 class="display-3">Category Panel</h1>   
         <div>
-          <a style="margin: 19px;" href="{{ route('panel.create')}}" class="btn btn-primary">New post</a>
+          <a style="margin: 19px;" href="{{ route('category.create')}}" class="btn btn-primary">New category</a>
         </div>          
-        @foreach($posts as $post)
+        @foreach($categories as $category)
         <table class="table table-striped">
           <thead>
               <tr>
                 <td>ID</td>
-                <td>Title</td>
-                <td>Subtitle</td>
-                <td>URL Img</td>
-                <td>Body</td>
-                <td>Tag</td>
-                <td>Category Id</td>
-                <td>Category Name</td>
+                <td>Name</td>
                 <td>Adult</td>
-                <td colspan = 2>Actions</td>
+                <td>Icon</td>
+                <td>Created</td>
+                <td>Updated</td>
+                <td colspan = 3>Actions</td>
               </tr>
           </thead>
           <tbody>
               <tr>
-                  <td>{{$post->id}}</td>
-                  <td>{{$post->title}}</td>
-                  <td>{{$post->subtitle}}</td>
-                  <td>{{$post->img}}</td>
-                  <td>{{$post->body}}</td>
-                  <td class="tag-post">
-                    @if (count($post->tags) > 0 )
-                      @foreach ($post->tags as $tag)
-                        <span class="tag"> {{$tag->name}} </span>                      
-                      @endforeach
-                      @else
-                        N/a
-                    @endif
-                  </td>
-                  <td>{{optional($post->category)->id}}</td>
-                  <td>{{optional($post->category)->name}}</td>
-                  <td>{{optional($post->category)->adult ? 'Yes' : 'No'}}</td>
+                  <td>{{$category->id}}</td>
+                  <td>{{$category->name}}</td>
+                  <td>{{$category->adult ? "🔞" : "👌✔️"}}</td>
+                  <td>{{$category->icon}}</td>
+                  <td>{{$category->created_at}}</td>
+                  <td>{{$category->updated_at}}</td>
                   <td>
-                      <a href="{{ route('panel.edit',$post->id)}}" class="btn btn-primary">Edit</a>
+                      <a href="{{ route('category.edit',$category->id)}}" class="btn btn-primary">Edit</a>
                   </td>
+{{--                   <td>
+                    <a href="{{ route('category.show',$category->id)}}" class="btn btn-primary">Show</a>
+                  </td> --}}
                   <td>
-                    <a href="{{ route('panel.show',$post->id)}}" class="btn btn-primary">Show</a>
-                  </td>
-                  <td>
-                      <form action="{{ route('panel.destroy', $post->id)}}" method="post">
+                      <form action="{{ route('category.destroy', $category->id)}}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Delete</button>

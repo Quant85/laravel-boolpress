@@ -1941,7 +1941,10 @@ __webpack_require__.r(__webpack_exports__);
 
     console.log('Component mounted.');
     axios.get('api/categories').then(function (response) {
+      console.log(response.data.resources);
       _this.categories = response.data.resources;
+
+      _this.$set(_this.posts, "category_name", "");
     })["catch"](function (error) {
       console.log(error);
     });
@@ -38359,7 +38362,9 @@ var render = function() {
             _vm._v(" "),
             _c("h2", [_vm._v("Name Category: " + _vm._s(category.name))]),
             _vm._v(" "),
-            _c("h3", [_vm._v("Se: " + _vm._s(category.adult))])
+            _c("h3", [
+              _vm._v("Adult: " + _vm._s(category.adult ? "Yes" : "No"))
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [

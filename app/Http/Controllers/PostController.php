@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 
 class PostController extends Controller
@@ -16,7 +17,8 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
+        //$posts = Post::all();
+        $posts = Post::latest()->get();// mette in ordine
         return view('pages.panel_control.index', compact('posts'));
     }
 
@@ -28,7 +30,10 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('pages.panel_control.create');
+
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('pages.panel_control.create', compact('tags','categories'));
 
     }
 
@@ -41,22 +46,35 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+
+        //dd($request->all());
         //elementi di validazione necessari
-        $request->validate([
+        $validate_date = $request->validate([
             'title'=>'required',
             'subtitle'=>'required',
-            'body'=>'required'
-        ]);
+            'body'=>'required',
+            'img'=>'required',
+            'category_id' => 'required',
+            'tags[]'=>'exists:tags, id'
+            ]);
+
+        //dd($validate_date);
+        
         //Qui creeremo il nostro Post
-        $post = new Post([
+        /* $post = new Post([
             'title' => $request->get('title'),
             //equivalente di 'title' => request('title')
             'subtitle' => $request->get('subtitle'),
             'img' => $request->get('img'),
             'body' => $request->get('body'),
-            ]);
+            ]); */
+
+        Post::create($validate_date);
+
+        $post = Post::orderBy('id','desc')->first();
+        $post->tags()->attach($request->tags);
         //andiamo a salvare la risorsa appena creata
-        $post->save();
+        //$post->save();
         return redirect('/panel')->with('success', 'Post saved!');
     }
 
@@ -109,7 +127,7 @@ class PostController extends Controller
         $post->img = $request->get('img');
         $post->body = $request->get('body');
         $post->category()->name =  $request->get('category_name');
-        $post->save();
+        $post->update();
         return redirect('/panel')->with('success', 'Post saved!');
     }
 
@@ -123,6 +141,7 @@ class PostController extends Controller
     {
         //
         $post = Post::find($id);
+        $post->tags()->detach();
             $post->delete();
             return redirect('/panel')->with('success', 'Post deleted!');
     }

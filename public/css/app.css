@@ -11012,3 +11012,17 @@ nav ul li a {
   border-radius: 1rem;
 }
 
+aside {
+  width: 10%;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 2rem 4rem;
+}
+
+aside a.dropdown-item {
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 2rem;
+  margin: 0.5rem 0;
+}
+

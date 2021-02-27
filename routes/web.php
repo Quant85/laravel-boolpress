@@ -22,3 +22,7 @@ Route::get('/', function () {
 Route::get('blog','PageController@post_list');
 
 Route::resource('panel', 'PostController');
+
+Route::resource('category', 'CategoryController');
+
+Route::resource('tag', 'TagController');

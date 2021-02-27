@@ -62,8 +62,21 @@
           </div>
 
           <div class="form-group">
-              <label for="category_name">Category Name:</label>
-              <input type="text" class="form-control" name="category_name"/>
+              <label for="categories">Categories</label>
+            <select class="form-control" name="category_id" id="categories">
+              @foreach ($categories as $category)
+                  <option value="{{$category->id}}">{{$category->name}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <select class="form-control" name="tags[]" id="tags" multiple>
+              @foreach ($tags as $tag)
+                  <option value="{{$tag->id}}">{{$tag->name}}</option>
+              @endforeach
+            </select>
           </div>
 
           <button type="submit" class="btn btn-outline-primary btn-block">Add Post</button>
