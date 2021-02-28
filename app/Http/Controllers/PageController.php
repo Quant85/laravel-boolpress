@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -20,4 +22,5 @@ class PageController extends Controller
     {
         return view('pages.blog.blog');
     }
+
 }

@@ -10043,6 +10043,21 @@ nav ul li a {
   display: flex;
   justify-content: center;
 }
+#panel-main .search-section {
+  width: 100%;
+  display: flex;
+}
+#panel-main .search-section form {
+  width: 90%;
+}
+#panel-main .search-section a.refresh {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+#panel-main .search-section .icon {
+  height: 2.2rem;
+}
 
 .main-article-card {
   display: flex;

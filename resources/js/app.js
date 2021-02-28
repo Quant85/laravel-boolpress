@@ -22,6 +22,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('post-component', require('./components/PostCardComponent.vue').default);
 Vue.component('category-component', require('./components/CategoriesComponent.vue').default);
+Vue.component('tag-component', require('./components/TagsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

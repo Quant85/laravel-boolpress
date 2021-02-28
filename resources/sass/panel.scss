@@ -1,4 +1,19 @@
 #panel-main{
   display: flex;
   justify-content: center;
+  .search-section{
+    width: 100%;
+    display: flex;
+    form{
+      width: 90%;
+    }
+    a.refresh{
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .icon{
+      height: 2.2rem;
+    }
+  }
 }

@@ -12,7 +12,8 @@ class Post extends Model
     'subtitle',
     'img',
     'body',
-    'category_id'
+    'category_id',
+    'created_at'
     ] ;
 
     public function category()

@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
-
+use DB;
 
 class PostController extends Controller
 {
@@ -155,5 +155,21 @@ class PostController extends Controller
         $post->tags()->detach();
         $post->delete();
         return redirect('/panel')->with('success', 'Post deleted!');
+    }
+
+    //search
+
+    public function search(Request $request, Post $posts)
+    {
+        //
+        $fromCreated = $request->input('fromCreated');
+        $toCreated = $request->input('toCreated');
+        $posts = $posts
+                        ->where('created_at','>=',$fromCreated)
+                        ->where('created_at','<=',$toCreated)->get();  
+        //$posts = Post::where([['created_at','>=',$fromCreated],['created_at','<=',$toCreated]])->get();
+
+        return view('pages.panel_control.index', compact('posts'));
+
     }
 }

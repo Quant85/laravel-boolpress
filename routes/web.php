@@ -26,3 +26,6 @@ Route::resource('panel', 'PostController');
 Route::resource('category', 'CategoryController');
 
 Route::resource('tag', 'TagController');
+
+/* ---------------------------- search ------------------------- */
+Route::post('/search','PostController@search')->name('search');

@@ -1,5 +1,5 @@
 <template>
-    <div class="posts">
+    <div class="categories">
         <div class="col-md-12">
             <div class="card" v-for="(category, id) in categories" v-bind:key="id">
                 <div class="card-header">

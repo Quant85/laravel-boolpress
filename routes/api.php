@@ -31,6 +31,8 @@ Route::get('posts', 'API\PostController@index');
 
 Route::get('categories', 'API\CategoryController@index');
 
+Route::get('tags', 'API\TagController@index');
+
 /* Route::get('categories', function (){
     return response()->json([
         'success' => true,
@@ -38,9 +40,3 @@ Route::get('categories', 'API\CategoryController@index');
     ], 200);
 }); */
 
-Route::get('tags', function (){
-    return response()->json([
-        'success' => true,
-        'resources' => App\Tags::all()
-    ], 200);
-});

@@ -1,20 +1,16 @@
 <template>
-    <div class="posts">
+    <div class="tags">
         <div class="col-md-12">
-            <div class="card" v-for="(post, id) in posts" v-bind:key="id">
+            <div class="card" v-for="(tag, id) in tags" v-bind:key="id">
                 <div class="card-header">
-                    <h2>Post id: {{post.id}}</h2>
-                    <h2>Title: {{post.title}}</h2>
-                    <h3>Title: {{post.subtitle}}</h3>
-                </div>
-
-                <div class="card-body">
-                    <img :src="post.img" alt="qui va l'immagine del post">
-                    <p>{{post.body}}</p>
+                    <h2>Tag id: {{tag.id}}</h2>
+                    <h2>Name Tag: #{{tag.name}}</h2>
+                    <h3>Slug: {{tag.slug ? tag.slug : ' No Slug'}}</h3>
+                    <p>Description: {{tag.description}}</p>
                 </div>
                 <div class="card-footer">
-                    <h4> Created at {{ new Date(post.created_at).toLocaleString('IT') }}</h4>
-                    <h4> Created at {{ new Date(post.updated_at).toLocaleString('IT') }}</h4>
+                    <h4> Created at {{ new Date(tag.created_at).toLocaleString('IT') }}</h4>
+                    <h4> Created at {{ new Date(tag.updated_at).toLocaleString('IT') }}</h4>
                 </div>
             </div>
         </div>
@@ -25,13 +21,15 @@
     export default {
         data(){
             return {
-                posts: ""
+                tags: ""
             }
         },
         mounted() {
             console.log('Component mounted.')
-            axios.get('api/posts').then(response => {
-                this.posts = response.data.resources;
+            axios.get('api/tags').then(response => {
+                console.log(response.data.resources);
+                this.tags = response.data.resources;
+                //this.$set(this.posts,"category_name","")
             }).catch (error => {
                 console.log(error);
             });
